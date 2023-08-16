@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    <bean id="author1" class="com.latihan.domain.Author">
+        <property name="name" value="M. Pierce"></property>
+        <property name="id" value="1"></property>
+        <property name="birthDate" value="-16041"></property>
+    </bean>
+    <bean id="author2" class="com.latihan.domain.Author">
+        <property name="name" value="Coolen Hovver"></property>
+        <property name="id" value="2"></property>
+        <property name="birthDate" value="-15042"></property>
+    </bean>
+    <bean id="book1" class="com.latihan.domain.Book">
+        <property name="id" value="1"></property>
+        <property name="title" value="Night Owl"></property>
+        <property name="description" value="Night Owl by M. Pierce"></property>
+        <property name="author" ref="author1"></property>
+    </bean>
+    <bean id="book2" class="com.latihan.domain.Book">
+        <property name="id" value="2"></property>
+        <property name="title" value="Slammed"></property>
+        <property name="description" value="Slammed by Coolen Hovver"></property>
+        <property name="author" ref="author2"></property>
+    </bean>
+    <bean id="bookRepository" class="com.latihan.repository.impl.BookRepositoryImpl">
+        <property name="bookMap">
+            <map>
+                <entry key="1" value-ref="book1"></entry>
+                <entry key="2" value-ref="book2"></entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="bookService" class="com.latihan.service.impl.BookServiceImpl">
+        <constructor-arg ref="bookRepository"></constructor-arg>
+<!--        <property name="bookRepository" ref="bookRepository"></property>-->
+
+    </bean>
+</beans>
